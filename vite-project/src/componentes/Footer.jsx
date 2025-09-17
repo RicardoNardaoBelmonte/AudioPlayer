@@ -19,20 +19,35 @@ export function Footer() {
                             <span className='text-base text-gray-400'>Daft Punk</span>
                         </div>
                         <div>
-                            <img className='' src={estrela} alt="" />
+                            <button  className='cursor-pointer'>
+                                <img className='' src={estrela} alt="" />
+                            </button>
                         </div>
                     </div>
 
                     <div className="flex gap-7 items-center">
-                        <img className='w-5 h-5' src={loop} alt="" />
-                        <img className='w-6 h-6' src={proximoLeft} alt="" />
-                        <img className='w-6 h-6' src={playButton} alt="" />
-                        <img className='w-6 h-6' src={proximoRight} alt="" />
+                        <button  className='cursor-pointer'>
+                            <img className='w-5 h-5' src={loop} alt="" />
+                        </button>
+
+                        <button  className='cursor-pointer'>
+                            <img className='w-6 h-6' src={proximoLeft} alt="" />
+                        </button>
+
+                        <button className='cursor-pointer'>
+                            <img className='w-6 h-6' src={playButton} alt="" />
+                        </button>
+
+                        <button  className='cursor-pointer'>
+                            <img className='w-6 h-6' src={proximoRight} alt="" />
+                        </button>
                     </div>
 
                     <div className='flex gap-20'>
                         <span className='text-sm text-white ml-20'>2:18 / 3:21</span>
-                        <img className='w-6 h-6' src={soundVolume} alt="" />
+                        <button  className='cursor-pointer'>
+                            <img className='w-6 h-6' src={soundVolume} alt="" />
+                        </button>
                     </div>
                 </div>
 

@@ -40,7 +40,7 @@ export function Home() {
 
                             <div className='flex flex-col items-center text-center justify-center font-bold'>
                                 <h2 className='text-textPrimary text-2xl w-100'>Clique no botão abaixo para adicionar suas músicas</h2>
-                                <button className='h-50 w-50'><img className='w-full h-full' src={botaoAdicionar} alt="" /></button>
+                                <button className=''><img className='w-48 h-48 cursor-pointer rounded-full' src={botaoAdicionar} alt="" /></button>
                             </div>
                     </div>
                 </div>
