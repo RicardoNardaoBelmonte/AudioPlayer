@@ -1,14 +1,100 @@
 "use client"
-import React from 'react';
+import { useState } from 'react';
 import hamburguerButton from '../../../public/assets/home/header/hamburguerButton.png';
 import logo from '../../../public/assets/home/header/logo.png';
 import Image from 'next/image';
+import {Modal} from '../hooks/Modal.js';
+import { useMutation } from '@tanstack/react-query';
 
 export function Header() {
 
-    const [active, setActive] = React.useState(false);
+    const [showLogin, setShowLogin] = useState(false);
+    const [showRegister, setShowRegister] = useState(false);
+    const [active, setActive] = useState(false);
+    const [isLogged, setIsLogged] = useState(false);
     //Aqui criei o Header que pode ser chamado em outros componentes oq é bom já q vamos reutilizar ele
     //Então so importa e chama o componente que nem eu fiz na Home.jsx que ele ja aparece mesma coisa com o footer
+    
+    function LoginForm ({handleSubmit}) {
+        const [loginData, setLoginData] = useState({ nome: "", senha: "" });
+    
+    return (
+        <form className='flex flex-col gap-10 w-full' onSubmit={(e) => handleSubmit(e, "login", loginData)}>
+            <h2 className='text-4xl font-bold text-center text-primary'>Login</h2>
+
+            <input type="text" placeholder='Nome' className='p-2 border border-borderGray rounded text-white' value={loginData.nome} onChange={(e) => setLoginData({...loginData, nome: e.target.value})}/>
+
+            <input type="password" placeholder='Senha' className='p-2 border border-borderGray rounded text-white' value={loginData.senha} onChange={(e) => setLoginData({...loginData, senha: e.target.value})}/>
+
+            <button type='submit' className='bg-primary cursor-pointer text-white p-2 rounded hover:scale-110 transition-transform duration-300 smooth'>Submit</button>
+        </form>
+    )}
+
+    function RegisterForm({handleSubmit}) {
+
+        const [registerData, setRegisterData] = useState({ nome: "", senha: "" });
+    
+        return (
+        <form className='flex flex-col gap-10 w-full' onSubmit={(e) => handleSubmit(e, "register", registerData)}>
+            <h2 className='text-4xl font-bold text-center text-primary'>Registre-se</h2>
+
+            <input type="text" placeholder='Nome e sobrenome' className='p-2 border border-borderGray rounded text-white' value={registerData.nome} onChange={(e) => setRegisterData({...registerData, nome: e.target.value})}/>
+
+            <input type="password" placeholder='Senha' className='p-2 border border-borderGray rounded text-white' value={registerData.senha} onChange={(e) => setRegisterData({...registerData, senha: e.target.value})}/>
+
+            <button type='submit' className='bg-primary cursor-pointer text-white p-2 rounded hover:scale-110 transition-transform duration-300 smooth'>Submit</button>
+        </form>
+    )}
+
+    const loginMutation = useMutation({
+        mutationFn: async (loginData) => {
+          const res = await fetch("/api/login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(loginData),
+          });
+          const json = await res.json();
+          if (!res.ok) throw new Error(json.error || "Erro ao fazer login");
+          return json;
+        },
+        onSuccess: (data) => {
+          localStorage.setItem("token", data.token);
+          setIsLogged(true);
+          setShowLogin(false);
+          alert("Login realizado com sucesso");
+        },
+        onError: (e) => alert(e.message || "Erro ao fazer login"),
+    });
+
+    const registerMutation = useMutation({
+        mutationFn: async (registerData) => {
+          const res = await fetch("/api/usuarios", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(registerData),
+          });
+          const json = await res.json();
+          if (!res.ok) throw new Error(json.error || "Erro ao registrar usuário");
+          return json;
+        },
+        onSuccess: () => {
+          alert("Usuário registrado com sucesso, faça o login");
+          setShowRegister(false);
+        },
+        onError: (e) => alert(e.message || "Erro ao registrar usuário"),
+    });
+
+    function handleSubmit(e, type, data){
+        e.preventDefault();
+
+        if(type === "login"){
+            loginMutation.mutate({nome: data.nome, senha: data.senha});
+        }else if(type === "register"){
+            registerMutation.mutate({nome: data.nome, senha: data.senha});
+        }
+    }
+    
+    
     return(
         <header className='' >
             <nav className='h-18 flex items-center w-full'>
@@ -30,6 +116,18 @@ export function Header() {
                         <span className='text-primray'>Audio</span>{""}Player
                     </span>
                 </div>
+
+                <div className='ml-100 flex gap-5'>
+                    <button className='text-white bg-primary p-2 rounded cursor-pointer' onClick={() => setShowLogin(true)}>Login</button>
+                    <button className='text-white bg-green-600 p-2 rounded cursor-pointer' onClick={() => setShowRegister(true)}>Register</button>
+                </div>
+
+                <Modal isOpen={showLogin} closed={() => setShowLogin(false)}>
+                    <LoginForm  handleSubmit={handleSubmit}/>
+                </Modal>
+                <Modal isOpen={showRegister} closed={() => setShowRegister(false)}>
+                    <RegisterForm  handleSubmit={handleSubmit}/>
+                </Modal>
             </nav>
         </header>
     )
