@@ -8,7 +8,6 @@ import {Footer} from '../componentes/Footer.js';//Estou chamando o componente cr
 import Image from 'next/image';
 import { useState } from 'react';
 import {Modal} from '../hooks/Modal.js';
-import {buscarMusica} from '../api/fetchMusicas.js';
 
 export default function Home() {
 
@@ -98,7 +97,7 @@ export default function Home() {
                 {/* Criei a div que fica no centro Escrvendo os textos e colocando as cores basicamente tudo utilizando html e css aq so q com nome de classes do tailwind para não precisar por no index.css global */}
             </section>
             <Footer/> {/* Chamando component Footer para aparecer primeiro no component Home onde estamos */}
-            <Modal isOpen={isOpen} closed={() => {setIsOpen(false); setMusicas([]);}}>
+            <Modal isOpen={isOpen} closed={() => {setIsOpen(false); setMusicas([]);}}>{/* Crei um componente modal para conseguir chamar ele e prover o "filho" que seria o formulario dentro da modal */}
                 <FormModal handleSubmit={handleSubmit}/>
 
             </Modal>

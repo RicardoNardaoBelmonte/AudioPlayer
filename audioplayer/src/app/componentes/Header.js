@@ -46,43 +46,43 @@ export function Header() {
         </form>
     )}
 
-    const loginMutation = useMutation({
-        mutationFn: async (loginData) => {
-          const res = await fetch("/api/login", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(loginData),
-          });
-          const json = await res.json();
-          if (!res.ok) throw new Error(json.error || "Erro ao fazer login");
-          return json;
-        },
-        onSuccess: (data) => {
-          localStorage.setItem("token", data.token);
-          setIsLogged(true);
-          setShowLogin(false);
-          alert("Login realizado com sucesso");
-        },
-        onError: (e) => alert(e.message || "Erro ao fazer login"),
-    });
+    // const loginMutation = useMutation({
+    //     mutationFn: async (loginData) => {
+    //       const res = await fetch("/api/login", {
+    //         method: "POST",
+    //         headers: { "Content-Type": "application/json" },
+    //         body: JSON.stringify(loginData),
+    //       });
+    //       const json = await res.json();
+    //       if (!res.ok) throw new Error(json.error || "Erro ao fazer login");
+    //       return json;
+    //     },
+    //     onSuccess: (data) => {
+    //       localStorage.setItem("token", data.token);
+    //       setIsLogged(true);
+    //       setShowLogin(false);
+    //       alert("Login realizado com sucesso");
+    //     },
+    //     onError: (e) => alert(e.message || "Erro ao fazer login"),
+    // });
 
-    const registerMutation = useMutation({
-        mutationFn: async (registerData) => {
-          const res = await fetch("/api/usuarios", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(registerData),
-          });
-          const json = await res.json();
-          if (!res.ok) throw new Error(json.error || "Erro ao registrar usuário");
-          return json;
-        },
-        onSuccess: () => {
-          alert("Usuário registrado com sucesso, faça o login");
-          setShowRegister(false);
-        },
-        onError: (e) => alert(e.message || "Erro ao registrar usuário"),
-    });
+    // const registerMutation = useMutation({
+    //     mutationFn: async (registerData) => {
+    //       const res = await fetch("/api/usuarios", {
+    //         method: "POST",
+    //         headers: { "Content-Type": "application/json" },
+    //         body: JSON.stringify(registerData),
+    //       });
+    //       const json = await res.json();
+    //       if (!res.ok) throw new Error(json.error || "Erro ao registrar usuário");
+    //       return json;
+    //     },
+    //     onSuccess: () => {
+    //       alert("Usuário registrado com sucesso, faça o login");
+    //       setShowRegister(false);
+    //     },
+    //     onError: (e) => alert(e.message || "Erro ao registrar usuário"),
+    // });
 
     function handleSubmit(e, type, data){
         e.preventDefault();
