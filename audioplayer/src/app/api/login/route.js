@@ -7,7 +7,7 @@ export function verifyToken(req) {
     const authHeader = req.headers.get("authorization");
   
     if (!authHeader) {
-      return { error: "Token não encontrado", status: 401 };
+      return { error: "Você precisa estar logado", status: 401 };
     }
   
     const token = authHeader.split(" ")[1];
@@ -16,7 +16,7 @@ export function verifyToken(req) {
       const payload = jwt.verify(token, process.env.SECRET_KEY);
       return { payload }; 
     } catch (e) {
-      return { error: "Token inválido ou expirado", status: 401 };
+      return { error: "Login inválido ou expirado", status: 401 };
     }
   }
 
@@ -40,7 +40,7 @@ export async function POST(req){
             {expiresIn: "24h"}
         );
 
-        return NextResponse.json({ token }, { status: 200 });
+        return NextResponse.json({ token, user } , { status: 200 });
       }catch(e){
         return NextResponse.json({message: e.message}, {status: 500});
     }
