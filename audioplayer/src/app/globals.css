@@ -19,3 +19,14 @@ nav{
   --color-textPrimary: #8C8C8C;
   --color-borderGray: #2c2c2c;
 }
+
+@layer utilities {
+  .scrollbar-hide {
+    -ms-overflow-style: none;  
+    scrollbar-width: none;     
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none; 
+  }
+}
