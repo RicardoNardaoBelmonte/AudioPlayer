@@ -17,7 +17,7 @@ db.prepare(`
         titulo TEXT NOT NULL,
         artista TEXT NOT NULL,
         path TEXT NOT NULL,
-        duracao TEXT NOT NULL,
+        duracao TEXT,
         thumb TEXT,
         usuario_id INTEGER,
         FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
@@ -42,9 +42,9 @@ export async function deletarUsuario(id){
     return info.changes;
 }
 
-export async function criarMusica(titulo, artista, path, duracao, thumb, usuario_id ){
-    const stmt = db.prepare("INSERT INTO musicas (titulo, artista, path, duracao, thumb, usuario_id) VALUES (?, ?, ?, ?, ?, ?)");
-    const info = stmt.run(titulo, artista, path, duracao, thumb, usuario_id);
+export async function criarMusica(titulo, artista, path, thumb, duracao, usuario_id ){
+    const stmt = db.prepare("INSERT INTO musicas (titulo, artista, path, thumb, duracao, usuario_id) VALUES (?, ?, ?, ?, ?, ?)");
+    const info = stmt.run(titulo, artista, path, thumb, duracao, usuario_id);
     return info.lastInsertRowid;
 }   
 
@@ -59,7 +59,8 @@ export async function buscarMusicaPorTitulo(titulo) {
     return stmt.get(titulo); 
 }
   
-  export async function listarMusicas() {
-    const stmt = db.prepare("SELECT * FROM musicas");
-    return stmt.all(); 
+export async function listarMusicas(id) {
+    const stmt = db.prepare("SELECT * FROM musicas WHERE usuario_id = ?");
+    const info = stmt.all(id);
+    return info;
 }
