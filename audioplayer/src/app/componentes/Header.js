@@ -1,5 +1,5 @@
 "use client"
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import hamburguerButton from '../../../public/assets/home/header/hamburguerButton.png';
 import logo from '../../../public/assets/home/header/logo.png';
 import Image from 'next/image';
@@ -8,10 +8,18 @@ import { useMutation } from '@tanstack/react-query';
 
 export function Header() {
 
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+        if(token) setIsLogged(true);
+        const nome = localStorage.getItem("nome");
+        setNome(nome);
+    }, [])
+
     const [showLogin, setShowLogin] = useState(false);
     const [showRegister, setShowRegister] = useState(false);
     const [active, setActive] = useState(false);
     const [isLogged, setIsLogged] = useState(false);
+    const [nome, setNome] = useState('');
     //Aqui criei o Header que pode ser chamado em outros componentes oq é bom já q vamos reutilizar ele
     //Então so importa e chama o componente que nem eu fiz na Home.jsx que ele ja aparece mesma coisa com o footer
     
@@ -61,6 +69,8 @@ export function Header() {
           localStorage.setItem("token", data.token);
           setIsLogged(true);
           setShowLogin(false);
+          localStorage.setItem("nome", data.user.nome);
+          setNome(data.user.nome);
           alert("Login realizado com sucesso");
         },
         onError: (e) => alert(e.message || "Erro ao fazer login"),
@@ -83,6 +93,15 @@ export function Header() {
         },
         onError: (e) => alert(e.message || "Erro ao registrar usuário"),
     });
+
+
+    function handleSair(e){
+        e.preventDefault();
+        setIsLogged(false);
+        localStorage.removeItem("token");
+        localStorage.removeItem("nome");
+        setNome('');
+    }
 
     function handleSubmit(e, type, data){
         e.preventDefault();
@@ -117,10 +136,18 @@ export function Header() {
                     </span>
                 </div>
 
-                <div className='ml-100 flex gap-5'>
-                    <button className='text-white bg-primary p-2 rounded cursor-pointer' onClick={() => setShowLogin(true)}>Login</button>
-                    <button className='text-white bg-green-600 p-2 rounded cursor-pointer' onClick={() => setShowRegister(true)}>Register</button>
-                </div>
+
+                {isLogged ? 
+                    <div className='ml-100 flex gap-5 text-white items-center'>
+                        <span>{nome}</span>
+                        <button onClick={handleSair} className='cursor-pointer bg-red-500 p-3 rounded'>Sair</button>
+                    </div>
+                :
+                    <div className='ml-100 flex gap-5'>
+                        <button className='text-white bg-primary p-2 rounded cursor-pointer' onClick={() => setShowLogin(true)}>Login</button>
+                        <button className='text-white bg-green-600 p-2 rounded cursor-pointer' onClick={() => setShowRegister(true)}>Register</button>
+                    </div>
+                }
 
                 <Modal isOpen={showLogin} closed={() => setShowLogin(false)}>
                     <LoginForm  handleSubmit={handleSubmit}/>
