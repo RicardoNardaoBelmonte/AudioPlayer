@@ -6,9 +6,49 @@ import capaMusica from '../../../public/assets/home/header/capaMusica.png';
 import soundVolume from '../../../public/assets/home/header/soundVolume.png';
 import estrela from '../../../public/assets/home/header/estrela.png';
 import Image from 'next/image';
+import { useQuery } from '@tanstack/react-query';
 
 export function Footer() {
 
+    const {data: publicMusicas = []} = useQuery({
+        queryKey: ['publicMusicas'],
+        queryFn: async () => {
+
+            const res = await fetch('/api/publicMusicas',)
+
+            if(!res.ok) throw new Error("Erro ao buscar músicas do usuário");
+            const publicMusicas = await res.json();
+            return publicMusicas;
+        }
+    })
+
+    const {data: MusicasDb = []} = useQuery({
+        queryKey: ['musicas'],
+        queryFn: async () => {
+
+            const token = localStorage.getItem('token');
+
+            if (!token) throw new Error("Você precisa estar Logado");
+
+            const res = await fetch('/api/musicas', {
+                headers: { Authorization: `Bearer ${token}`}
+            });
+
+            if(!res.ok) throw new Error("Erro ao buscar músicas do usuário");
+            const musicas = await res.json();
+            return musicas.musicas;
+        }
+    })
+
+    const musicasComAudio = MusicasDb.map(m => {
+        const arquivo = publicMusicas.find(p => p.nome.includes(m.path));
+        return {
+          ...m,
+          path: arquivo?.path || null,
+        };
+      });
+
+    
     return(
         <footer className='mx-15 bg-background pt-5 rounded-lg'>
             <div className="flex flex-col">
@@ -16,7 +56,7 @@ export function Footer() {
                     <div className="flex gap-4 items-center">
                         <Image className='w-15 h-15' src={capaMusica} alt="" />
                         <div className='flex flex-col'>
-                            <span className='text-white text-base'>Get Lucky feat. Pharrell Williams and Nile Rodgers</span>
+                            <span className='text-white text-base'>a</span>
                             <span className='text-base text-gray-400'>Daft Punk</span>
                         </div>
                         <div>
