@@ -9,6 +9,8 @@ import Image from 'next/image';
 import { useState } from 'react';
 import {Modal} from '../hooks/Modal.js';
 import {buscarMusica} from '../api/fetchMusicas.js';
+import Corpo from '../componentes/Corpo';
+import { useMutation } from '@tanstack/react-query';
 
 export default function Home() {
 
@@ -47,56 +49,62 @@ export default function Home() {
                 </form>
 
             <div className='max-h-[300px] overflow-y-auto flex flex-col gap-5'>
-                {musicas.map((musicas,index) => (
+                {musicas.map((musica,index) => {
+
+                    const path = musica.nome.toLowerCase().replace(/\s+/g, '');
+                    console.log(musica);
+                    return (
                         <div className='flex items-center gap-5 p-2 rounded border border-borderGray' key={index}>
-                            <Image src={musicas.thumb} alt='Thumb da Musica' width={60} height={60}/>
+                            <Image src={musica.thumb} alt='Thumb da Musica' width={60} height={60}/>
                             <div className='flex flex-col gap-2'>
-                                <span className='text-white font-semibold text-base truncate w-60'>{musicas.nome}</span>
-                                <span className='text-white font-semibold text-base truncate w-60'>{musicas.artista}</span>
+                                <span className='text-white font-semibold text-base truncate w-60'>{musica.nome}</span>
+                                <span className='text-white font-semibold text-base truncate w-60'>{musica.artista}</span>
                             </div>
-                            <button className='ml-5 p-1 bg-green-500 text-white cursor-pointer rounded'>
+                            <button onClick={() => adicionarMutation.mutate({musica, path})} className='ml-5 p-1 bg-green-500 text-white cursor-pointer rounded'>
                                 Adiconar
                             </button>
                         </div>
-                    ))}
+                    )
+                    })}
                 </div>
             </div>
         )
     }
 
+    const adicionarMutation = useMutation({
+        mutationFn: async (data) => {
+          const token = localStorage.getItem("token");
+
+          const res = await fetch("/api/musicas", {
+            method: "POST",
+            headers: { Authorization: `Bearer ${token}`,  "Content-Type": "application/json" },
+            body: JSON.stringify(data),
+          });
+          const json = await res.json();
+          if (!res.ok) throw new Error(json.error || "Erro ao buscar músicas");
+          return json;
+        },
+        onSuccess: () => alert("Música adicionada com sucesso"),
+        onError: (e) => alert(e.message || "Erro ao buscar músicas"),
+    });
+
     return(
         <>
             <Header/> {/* Chamando component Header para aparecer primeiro no component Home onde estamos */}
-            <section className='mx-15 mt-15 mb-15 h-[60vh] flex gap-20'>
-                {/* Criei a section com margens e tamanho especifico para ficar bom o gap é entre a aside e a div */}
-                <aside className='h-full w-50 bg-background p-1 rounded-lg'>
-                    <nav className='h-full w-full'>
-                        <ul className='flex flex-col gap-5 pt-10'>
-                            {linkNav.map((item) => (
-                                <li key={item.name} className='w-full h-10 pl-5 hover:bg-[#262626] transition-colors rounded'><a href="" className='flex gap-5 items-center w-full h-full'><Image src={item.icon} className='w-4 h-4' alt="" /><span className='text-gray-400'>{item.name}</span></a></li>
-                            ))}
-                        </ul>
-                    </nav>
-                </aside>
-                {/* Criei a aside a div lateral para por os link fiz um map onde eu meio que passo por todos os itens da lista de objetos e para cada item eu chamo o respectivo nome e afins */}
-                <div className='h-full w-full bg-background p-5 rounded-lg'>
-                    <div>
-                            <div className='flex items-center text-center justify-center font-bold'>
-                                <h1 className='text-textPrimary text-2xl'>Bem vindo(a) ao</h1>
-                                <Image src={logoMaior} alt="" className='h-50 w-50'/>
-                                <span className='flex gap-2 text-primary text-2xl'>
-                                    <span className='text-primray text-2xl'>Audio</span>{""}Player
-                                </span>
-                            </div>
-
-                            <div className='flex flex-col items-center text-center justify-center font-bold'>
-                                <h2 className='text-textPrimary text-2xl w-100'>Clique no botão abaixo para adicionar suas músicas</h2>
-                                <button onClick={() => setIsOpen(!isOpen)} className=''><Image className='w-48 h-48 cursor-pointer rounded-full' src={botaoAdicionar} alt="" /></button>
-                            </div>
+            <Corpo>
+                <div className='flex items-center text-center justify-center font-bold'>
+                        <h1 className='text-textPrimary text-2xl'>Bem vindo(a) ao</h1>
+                        <Image src={logoMaior} alt="" className='h-50 w-50'/>
+                        <span className='flex gap-2 text-primary text-2xl'>
+                            <span className='text-primray text-2xl'>Audio</span>{""}Player
+                        </span>
                     </div>
+
+                    <div className='flex flex-col items-center text-center justify-center font-bold'>
+                        <h2 className='text-textPrimary text-2xl w-100'>Clique no botão abaixo para adicionar suas músicas</h2>
+                        <button onClick={() => setIsOpen(!isOpen)} className=''><Image className='w-48 h-48 cursor-pointer rounded-full' src={botaoAdicionar} alt="" /></button>
                 </div>
-                {/* Criei a div que fica no centro Escrvendo os textos e colocando as cores basicamente tudo utilizando html e css aq so q com nome de classes do tailwind para não precisar por no index.css global */}
-            </section>
+            </Corpo>
             <Footer/> {/* Chamando component Footer para aparecer primeiro no component Home onde estamos */}
             <Modal isOpen={isOpen} closed={() => {setIsOpen(false); setMusicas([]);}}>
                 <FormModal handleSubmit={handleSubmit}/>
