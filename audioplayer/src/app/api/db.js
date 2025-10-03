@@ -48,9 +48,9 @@ export async function criarMusica(titulo, artista, path, thumb, duracao, usuario
     return info.lastInsertRowid;
 }   
 
-export async function deletarMusica(id){
-    const stmt = db.prepare("DELETE FROM musicas WHERE id = ?");
-    const info = stmt.run(id);
+export async function deletarMusica(id, user_id){
+    const stmt = db.prepare("DELETE FROM musicas WHERE id = ? AND usuario_id = ?");
+    const info = stmt.run(id, user_id);
     return info.changes;
 }
 
