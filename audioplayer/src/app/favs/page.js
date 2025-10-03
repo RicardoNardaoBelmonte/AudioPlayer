@@ -52,7 +52,7 @@ export default function Favs(){
 
     return(
         <>
-            <Header/>
+            <Header musicas={MusicasDb}/>
             <Corpo>
                 <div className='grid grid-cols-12 items-center px-4 py-3 text-white border-b border-white text-base 2xl:text-xl'>
                     <div className="col-span-6">Título</div>

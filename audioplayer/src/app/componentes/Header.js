@@ -4,9 +4,11 @@ import hamburguerButton from '../../../public/assets/home/header/hamburguerButto
 import logo from '../../../public/assets/home/header/logo.png';
 import Image from 'next/image';
 import {Modal} from '../hooks/Modal.js';
-import { useMutation } from '@tanstack/react-query';
+import {useMutation, useQueryClient } from '@tanstack/react-query';
 
 export function Header() {
+
+    const queryClient = useQueryClient();
 
     useEffect(() => {
         const token = localStorage.getItem("token");
@@ -101,6 +103,8 @@ export function Header() {
         localStorage.removeItem("token");
         localStorage.removeItem("nome");
         setNome('');
+        queryClient.invalidateQueries(['musicas']);
+        queryClient.setQueryData(['musicas'], []); 
     }
 
     function handleSubmit(e, type, data){
@@ -108,6 +112,7 @@ export function Header() {
 
         if(type === "login"){
             loginMutation.mutate({nome: data.nome, senha: data.senha});
+            queryClient.invalidateQueries(['musicas']);
         }else if(type === "register"){
             registerMutation.mutate({nome: data.nome, senha: data.senha});
         }
