@@ -115,10 +115,10 @@ export function Header() {
     
     
     return(
-        <header className='' >
-            <nav className='h-18 flex items-center w-full'>
-                <div className='mx-10 w-7 h-7'>
-                    <button className='relative cursor-pointer' onClick={() => setActive(!active)}><Image className='h-5 w-5' src={hamburguerButton} alt="" /></button>
+        <header className='w-full bg-background fixed top-0 left-0 z-50' >
+            <nav className='h-20 flex items-center w-full justify-between'>
+                <div className='ml-10 w-7 h-7'>
+                    <button className='relative cursor-pointer' onClick={() => setActive(!active)}><Image className='h-6 w-6' src={hamburguerButton} alt="" /></button>
                         <ul className={`absolute left-0 mt-1 ml-5 w-40 rounded-2xl bg-background p-1 border-black border rounded z-50 transform transition-all duration-300 ease-in-out origin-top
                         ${active ? "opacity-100 scale-100 visible" : "opacity-0 scale-y-0 invisible"}`}>
                             <li className='hover:bg-[#262626] text-white px-3 rounded'><a href="">Arquivo</a></li>
@@ -129,23 +129,23 @@ export function Header() {
                         </ul>
                 </div>
 
-                <div className='flex items-center gap-2 ml-140'>
+                <div className='flex items-center gap-2'>
                     <Image src={logo} alt="" />
-                    <span className='flex gap-2 text-primary text-base'>
+                    <span className='flex gap-2 text-primary text-base md:text-xl 2xl:text-2xl'>
                         <span className='text-primray'>Audio</span>{""}Player
                     </span>
                 </div>
 
 
                 {isLogged ? 
-                    <div className='ml-100 flex gap-5 text-white items-center'>
-                        <span>{nome}</span>
-                        <button onClick={handleSair} className='cursor-pointer bg-red-500 p-3 rounded'>Sair</button>
+                    <div className='flex gap-5 text-white items-center mr-10'>
+                        <span className='text-base md:text-xl'>{nome}</span>
+                        <button onClick={handleSair} className='cursor-pointer bg-red-500 p-3 rounded text-base md:text-xl'>Sair</button>
                     </div>
                 :
-                    <div className='ml-100 flex gap-5'>
-                        <button className='text-white bg-primary p-2 rounded cursor-pointer' onClick={() => setShowLogin(true)}>Login</button>
-                        <button className='text-white bg-green-600 p-2 rounded cursor-pointer' onClick={() => setShowRegister(true)}>Register</button>
+                    <div className='flex gap-5 mr-10'>
+                        <button className='text-white bg-primary p-2 rounded cursor-pointer text-base md:text-xl' onClick={() => setShowLogin(true)}>Login</button>
+                        <button className='text-white bg-green-600 p-2 rounded cursor-pointer text-base md:text-xl' onClick={() => setShowRegister(true)}>Register</button>
                     </div>
                 }
 
