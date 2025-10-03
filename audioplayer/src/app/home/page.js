@@ -93,16 +93,16 @@ export default function Home() {
             <Header/> {/* Chamando component Header para aparecer primeiro no component Home onde estamos */}
             <Corpo>
                 <div className='flex items-center text-center justify-center font-bold'>
-                        <h1 className='text-textPrimary text-2xl'>Bem vindo(a) ao</h1>
+                        <h1 className='text-textPrimary md:text-base xl:text-2xl 2xl:text-4xl'>Bem vindo(a) ao</h1>
                         <Image src={logoMaior} alt="" className='h-50 w-50'/>
-                        <span className='flex gap-2 text-primary text-2xl'>
-                            <span className='text-primray text-2xl'>Audio</span>{""}Player
+                        <span className='flex gap-2 text-primary md:text-base xl:text-2xl 2xl:text-4xl'>
+                            <span className='text-primray md:text-base xl:text-2xl 2xl:text-4xl'>Audio</span>{""}Player
                         </span>
                     </div>
 
                     <div className='flex flex-col items-center text-center justify-center font-bold'>
-                        <h2 className='text-textPrimary text-2xl w-100'>Clique no botão abaixo para adicionar suas músicas</h2>
-                        <button onClick={() => setIsOpen(!isOpen)} className=''><Image className='w-48 h-48 cursor-pointer rounded-full' src={botaoAdicionar} alt="" /></button>
+                        <h2 className='text-textPrimary md:text-base xl:text-2xl 2xl:text-4xl w-100'>Clique no botão abaixo para adicionar suas músicas</h2>
+                        <button onClick={() => setIsOpen(!isOpen)} className=''><Image className='md:w-35 md:h-35 xl:w-48 xl:h-48 2xl:w-70 2xl:h-70 cursor-pointer rounded-full' src={botaoAdicionar} alt="" /></button>
                 </div>
             </Corpo>
             <Footer/> {/* Chamando component Footer para aparecer primeiro no component Home onde estamos */}
