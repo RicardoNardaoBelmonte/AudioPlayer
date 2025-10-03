@@ -1,7 +1,7 @@
 "use server"
 
 import { NextResponse  } from "next/server";
-import { criarMusica,  listarMusicas } from "../db.js";
+import { criarMusica,  listarMusicas, deletarMusica } from "../db.js";
 import { verifyToken } from "../login/route.js";
 
 function msToMinutesAndSeconds(ms) {
@@ -45,11 +45,32 @@ export async function GET(req){
 
         if(error) return NextResponse.json({error}, {status});
 
-        const idFromToken = payload.id
+        const idFromToken = payload.id;
 
         const musicas = await listarMusicas(idFromToken);
         
         return NextResponse.json({musicas}, {status: 200});
+    }catch(e){
+        return NextResponse.json({error: e.message}, {status: 500});
+    }
+}
+
+export async function DELETE(req){
+
+    try{
+
+        const id = await req.json();
+        const { payload, error, status} = verifyToken(req);
+
+        if(error) return NextResponse.json({error}, {status});
+
+        const idFromToken = payload.id;
+
+        const musicaDeletada = deletarMusica(id, idFromToken);
+
+        if (!musicaDeletada) return NextResponse.json({error: "Música não encontrada ou id do usuário não bate"}, {status: 404})
+        
+        return NextResponse.json({message: "Música deletada com sucesso"});
     }catch(e){
         return NextResponse.json({error: e.message}, {status: 500});
     }
