@@ -30,3 +30,41 @@ nav{
     display: none; 
   }
 }
+
+
+#progress{
+  -webkit-appearance: none;
+  width: 100%;
+  height: 6px;
+  background: var(--color-primary);
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#progress::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  border: 8px solid #fff;
+  box-shadow: 0 5px 5px rgba(255, 26, 26, 0.22);
+}
+
+
+#volume{
+  -webkit-appearance: none;
+  width: 100%;
+  height: 6px;
+  background: var(--color-primary);
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#volume::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  border: 8px solid #fff;
+  box-shadow: 0 5px 5px rgba(255, 26, 26, 0.22);
+}
