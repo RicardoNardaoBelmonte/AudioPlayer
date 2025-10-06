@@ -5,26 +5,48 @@ Docente: Lori Ronaldo Flores Machado
 
 Integrantes da Equipe: Bruno Jung, Bruno Silveira e Ricardo Belmonte
 
+# Funcionalidades principais
+- Cadastro e login de usuários
+- Adicionar músicas em forma de playlist
+- Reproduzir músicas
+- Visualização álbuns
 
-# Documentação
+# Tecnologias usadas
+- HTML
+- JavaScript
+- CSS
+- Next.js
+# Instalação e execução local
 
-### 1. Preparar o ambiente de desenvolvimento:
-Será necessário escolher uma IDE se sua preferência. Para esse projeto, o grupo utulizou o Visual Studio Code, disponível em: https://code.visualstudio.com/download
+### 1. Como rodar localmente
+Clone o repositório: ```git clone https://github.com/RicardoNardaoBelmonte/AudioPlayer.git```
 
-Instalar o Node.js®, (v16.8 ou superior recomendado). Disponível em: https://nodejs.org/en/download.
+Vá até o diretório: ```AudioPlayer/audioplayer```
 
-Instalar o Framework NodeJS: 
+Instale as dependências do projeto: ```npm install```
 
-```npx create-next-app@latest nome-do-projeto```. 
+Execute a aplicação: ```npm run dev````
 
-**Note que esse passo não será necessário caso tenha feito o clone do repositório**
-<img width="580" height="725" alt="image" src="https://github.com/user-attachments/assets/2798261a-477b-4fa5-b367-98da2d4958cd" />
+Aguarde a compilação da aplicação, isso pode levar até 1 minuto.
+
+Após a finalização, acesse a url: ```http://localhost:3000```
+
+<img width="1914" height="939" alt="image" src="https://github.com/user-attachments/assets/7719c1da-5cbd-473a-ac6f-4d4d0dcde475" />
+
+# Como usar o AudioPlayer
+- Para começar a usar, é necessário criar uma conta e realizar login
+- ![Registro](https://github.com/user-attachments/assets/855bbc25-1d3f-4256-914e-27ef7721735a)
 
 
-Testar o funcinamento da estrutura básica do projeto, para isso execute o comando no terminal:
+## 📄 Licença
+Este projeto está licenciado sob a Licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
 
-```npm run dev```
 
-Após a compilação do código, você deverá acessar a url: http://localhost:3000. Com isso uma página web do next.js será exibida: 
-<img width="1913" height="945" alt="image" src="https://github.com/user-attachments/assets/f5b9104e-19a2-40e5-ac77-23c4074f1ad7" />
+
+
+
+
+
+
+
 
