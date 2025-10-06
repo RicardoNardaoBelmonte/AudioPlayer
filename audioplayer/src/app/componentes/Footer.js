@@ -150,9 +150,9 @@ export function Footer() {
     }
 
     return(
-        <footer className='mx-15 bg-background pt-5 rounded-lg'>
+        <footer className='mx-5 xl:mx-15 bg-background pt-5 rounded-lg min-w-230'>
             <div className="flex flex-col">
-                <div className="flex items-center gap-45 mx-5">
+                <div className="flex items-center justify-between mx-5">
 
                     {musicasComAudio[0]?.path && (
                         <audio onEnded={() => onEndedRandom()} ref={song} id='song'>
@@ -161,31 +161,37 @@ export function Footer() {
                     )}
 
                     <div className="flex gap-4 items-center">
-                    <Image
-                        className="w-15 h-15 rounded-md"
-                        src={musicasComAudio[currentMusic]?.thumb || "/assets/default-cover.png"}
-                        alt={musicasComAudio[currentMusic]?.titulo || "Capa da música"}
-                        width={60}
-                        height={60}
-                    />
+                        {musicasComAudio.length > 0 ? (
+                            <>
+                            <Image
+                                className="w-15 h-15 rounded-md"
+                                src={musicasComAudio[currentMusic]?.thumb || "/assets/default-cover.png"}
+                                alt={musicasComAudio[currentMusic]?.titulo || "Capa da música"}
+                                width={60}
+                                height={60}
+                            />
 
-                    <div className="flex flex-col">
-                        <span className="text-white text-base w-60 truncate">
-                        {musicasComAudio[currentMusic]?.titulo || "Título desconhecido"}
-                        </span>
-                        <span className="text-base text-gray-400 w-50 truncate">
-                        {musicasComAudio[currentMusic]?.artista || "Artista desconhecido"}
-                        </span>
+                            <div className="flex flex-col">
+                                <span className="text-white text-base w-60 truncate">
+                                {musicasComAudio[currentMusic]?.titulo || "Título desconhecido"}
+                                </span>
+                                <span className="text-base text-gray-400 w-50 truncate">
+                                {musicasComAudio[currentMusic]?.artista || "Artista desconhecido"}
+                                </span>
+                            </div>
+
+                            <div>
+                                <button className="cursor-pointer">
+                                <Image className="" src={estrela} alt="Favoritar" />
+                                </button>
+                            </div>
+                            </>
+                        ): (
+                            <span className="text-white text-base">Adicione suas músicas para começar a ouvir!</span>
+                        )}
                     </div>
 
-                    <div>
-                        <button className="cursor-pointer">
-                        <Image className="" src={estrela} alt="Favoritar" />
-                        </button>
-                    </div>
-                    </div>
-
-                    <div className="flex gap-10 items-center ml-10">
+                    <div className="flex gap-10 items-center">
                         <button className="cursor-pointer" onClick={() => handleRandomMusic()}>
                             <Image className="w-5 h-5" src={loop} alt="aleatório" />
                         </button>
@@ -203,12 +209,12 @@ export function Footer() {
                         </button>
                     </div>
 
-                    <div className="flex gap-10 items-center ml-15">
+                    <div className="flex gap-10 items-center">
                         <span className="text-sm text-white">
                             {musicasComAudio[currentMusic]?.duracao || "--:--"}
                         </span>
                         
-                        <div className='relative group flex items-center w-20'>
+                        <div className='relative group flex items-center w-20 mr-6'>
                             <button className="cursor-pointer relative flex items-center gap-2">
                                 <Image className="w-6 h-6" src={soundVolume} alt="Volume" />
                             </button>
