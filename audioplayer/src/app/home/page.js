@@ -102,7 +102,7 @@ export default function Home() {
 
                     <div className='flex flex-col items-center text-center justify-center font-bold'>
                         <h2 className='text-textPrimary md:text-base xl:text-2xl 2xl:text-4xl w-100'>Clique no botão abaixo para adicionar suas músicas</h2>
-                        <button onClick={() => setIsOpen(!isOpen)} className=''><Image className='md:w-35 md:h-35 xl:w-48 xl:h-48 2xl:w-70 2xl:h-70 cursor-pointer rounded-full' src={botaoAdicionar} alt="" /></button>
+                        <button onClick={() => setIsOpen(!isOpen)} className=''><Image className='w-35 md:h-35 xl:w-48 xl:h-48 2xl:w-70 2xl:h-70 cursor-pointer rounded-full' src={botaoAdicionar} alt="" /></button>
                 </div>
             </Corpo>
             <Footer/> {/* Chamando component Footer para aparecer primeiro no component Home onde estamos */}
