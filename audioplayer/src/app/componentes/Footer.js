@@ -218,7 +218,7 @@ export function Footer() {
                             <button className="cursor-pointer relative flex items-center gap-2">
                                 <Image className="w-6 h-6" src={soundVolume} alt="Volume" />
                             </button>
-                            <input type="range" min={0} max={1} step={0.01} value={volume} onChange={handleVolumeChange} className="absolute opacity-0 group-hover:opacity-100 ml-10" id='volume'/>
+                            <input type="range" min={0} max={1} step={0.01} value={volume} onChange={handleVolumeChange} className="absolute opacity-0 group-hover:opacity-100 ml-8" id='volume'/>
                         </div>
                     </div>
                 </div>
