@@ -134,7 +134,7 @@ export function Header() {
                         </ul>
                 </div>
 
-                <div className='flex items-center gap-2'>
+                <div className='flex items-center gap-2 ml-32'>
                     <Image src={logo} alt="" />
                     <span className='flex gap-2 text-primary text-base md:text-xl 2xl:text-2xl'>
                         <span className='text-primray'>Audio</span>{""}Player
@@ -143,12 +143,12 @@ export function Header() {
 
 
                 {isLogged ? 
-                    <div className='flex gap-5 text-white items-center mr-10'>
+                    <div className='flex gap-5 text-white items-center mr-5'>
                         <span className='text-base md:text-xl'>{nome}</span>
                         <button onClick={handleSair} className='cursor-pointer bg-red-500 p-3 rounded text-base md:text-xl'>Sair</button>
                     </div>
                 :
-                    <div className='flex gap-5 mr-10'>
+                    <div className='flex gap-5 mr-5'>
                         <button className='text-white bg-primary p-2 rounded cursor-pointer text-base md:text-xl' onClick={() => setShowLogin(true)}>Login</button>
                         <button className='text-white bg-green-600 p-2 rounded cursor-pointer text-base md:text-xl' onClick={() => setShowRegister(true)}>Register</button>
                     </div>
