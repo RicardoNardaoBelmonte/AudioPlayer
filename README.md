@@ -25,7 +25,10 @@ Vá até o diretório: ```AudioPlayer/audioplayer```
 
 Instale as dependências do projeto: ```npm install```
 
-Execute a aplicação: ```npm run dev````
+###### Será necessário colcar o arquivo .env.local na raíz do projeto, pois contém chaves de API. Solicite através da url: https://drive.google.com/file/d/16hF61kev3nOKqea5ZMtajwrSev5P0XhN/view?usp=drive_link
+
+
+Execute a aplicação: ```npm run dev```
 
 Aguarde a compilação da aplicação.
 
@@ -42,6 +45,8 @@ No terminal, execute: ```rm -rf node_modules package-lock.json```
 
 Depois: ```npm install```
 
+###### Será necessário colcar o arquivo .env.local na raíz do projeto, pois contém chaves de API. Solicite através da url: https://drive.google.com/file/d/16hF61kev3nOKqea5ZMtajwrSev5P0XhN/view?usp=drive_link
+
 Execute a aplicação: ```npm run dev```
 
 Aguarde a compilação da aplicação.
@@ -49,11 +54,13 @@ Aguarde a compilação da aplicação.
 Após a finalização, acesse a url: ```http://localhost:3000```
 
 # Como usar o AudioPlayer
-Para começar a usar, é necessário criar uma conta e realizar login
-![Registro](https://github.com/user-attachments/assets/855bbc25-1d3f-4256-914e-27ef7721735a)
+### 1. Para começar a usar, é necessário criar uma conta e realizar login
+![register](https://github.com/user-attachments/assets/a5f2ce88-c6c1-46bf-9edb-05731d5bde5f)
 
+### 2. Depois é só adicionar uma música e reproduzir
+![add](https://github.com/user-attachments/assets/e1238636-9f27-471b-b3fe-7fa1e60419a2)
 
-## 📄 Licença
+# Licença
 Este projeto está licenciado sob a Licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
 
 
