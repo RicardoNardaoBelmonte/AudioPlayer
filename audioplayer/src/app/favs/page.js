@@ -5,10 +5,13 @@ import { useMutation, useQuery, useQueryClient  } from '@tanstack/react-query';
 import Corpo from '../componentes/Corpo.js';
 import { Footer } from '../componentes/Footer.js';
 import delet from '../../../public/assets/home/header/delet.png';
+import { useState } from 'react';
+import PageMusic from '../componentes/pageMusic.js';
 
 export default function Favs(){
 
     const queryClient = useQueryClient();
+    const [active, setActive] = useState(false);
 
     const {data: MusicasDb = [], isLoading, isError} = useQuery({
         queryKey: ['musicas'],
@@ -53,7 +56,7 @@ export default function Favs(){
     return(
         <>
             <Header musicas={MusicasDb}/>
-            <Corpo>
+            {!active && <Corpo>
                 <div className='grid grid-cols-12 items-center px-4 py-3 text-white border-b border-white text-base 2xl:text-xl'>
                     <div className="col-span-6">Título</div>
                     <div className="col-span-4">Arista</div>
@@ -66,14 +69,16 @@ export default function Favs(){
                 <ul className='max-h-80 xl:max-h-96 2xl:max-h-[500] overflow-y-auto scrollbar-hide'>
                     {MusicasDb.map((musica, index) => (
                         <li key={index} >
-                            <div  className='grid grid-cols-12 items-center p-5 cursor-pointer hover:bg-borderGray mt-2 rounded-xl w-full'>
+                            <div  className='grid grid-cols-12 items-center p-5 hover:bg-borderGray mt-2 rounded-xl w-full'>
                                 <div className='col-span-5'>
-                                    <div className='flex tems-center items-center gap-5'>
-                                        <Image className='rounded' src={musica.thumb} width={50} height={50} alt='thumb da musica'/>
-                                        <div className='flex flex-col text-textPrimary'>
-                                            <span className='text-white w-60 text-start overflow-hidden truncate text-xs xl:text-base'>{musica.titulo}</span>
-                                            <span>{musica.duracao}</span>
-                                        </div>
+                                    <div className='flex tems-center items-center'>
+                                        <button className='cursor-pointer flex gap-5' onClick={() => setActive(true)}>
+                                            <Image className='rounded' src={musica.thumb} width={50} height={50} alt='thumb da musica'/>
+                                            <div className='flex flex-col text-textPrimary'>
+                                                <span className='text-white w-60 text-start overflow-hidden truncate text-xs xl:text-base'>{musica.titulo}</span>
+                                                <span className='text-start'>{musica.duracao}</span>
+                                            </div>
+                                        </button>
                                     </div>
                                 </div>
                                 <div className='col-span-6 w-70 overflow-hidden truncate text-textPrimary text-start'>
@@ -87,8 +92,12 @@ export default function Favs(){
                     ))}
                 </ul>
                     
-            </Corpo>
-            <Footer/>
+            </Corpo>}
+            {active ? (
+                <PageMusic active={active} setActive={setActive}/>
+            ) : (
+                <Footer active={active} setActive={setActive}/>
+            )}
         </>
     )
 }
