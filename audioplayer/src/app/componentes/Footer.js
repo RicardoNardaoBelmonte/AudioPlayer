@@ -10,7 +10,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useEffect , useRef, useState } from 'react';
 import pause from '../../../public/assets/home/header/pause.png';
 
-export function Footer() {
+export function Footer({ active, setActive}) {
 
     const {data: publicMusicas = []} = useQuery({
         queryKey: ['publicMusicas'],
@@ -163,13 +163,15 @@ export function Footer() {
                     <div className="flex gap-4 items-center">
                         {musicasComAudio.length > 0 ? (
                             <>
-                            <Image
-                                className="w-15 h-15 rounded-md"
-                                src={musicasComAudio[currentMusic]?.thumb || "/assets/default-cover.png"}
-                                alt={musicasComAudio[currentMusic]?.titulo || "Capa da música"}
-                                width={60}
-                                height={60}
-                            />
+                            <button className='cursor-pointer' onClick={() => setActive(true)}>
+                                <Image
+                                    className="w-15 h-15 rounded-md"
+                                    src={musicasComAudio[currentMusic]?.thumb || "/assets/default-cover.png"}
+                                    alt={musicasComAudio[currentMusic]?.titulo || "Capa da música"}
+                                    width={70}
+                                    height={70}
+                                />
+                            </button>
 
                             <div className="flex flex-col">
                                 <span className="text-white text-base w-60 truncate">
