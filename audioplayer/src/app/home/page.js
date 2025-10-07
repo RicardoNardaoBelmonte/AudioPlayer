@@ -11,6 +11,7 @@ import {Modal} from '../hooks/Modal.js';
 import {buscarMusica} from '../api/fetchMusicas.js';
 import Corpo from '../componentes/Corpo';
 import { useMutation } from '@tanstack/react-query';
+import PageMusic from '../componentes/pageMusic.js';
 
 export default function Home() {
 
@@ -21,6 +22,7 @@ export default function Home() {
 
     const [isOpen, setIsOpen] = useState(false);
     const [musicas, setMusicas] = useState([]);
+    const [active, setActive] = useState(false);
 
     async function handleSubmit(e, nomeMusica){
         e.preventDefault();
@@ -91,7 +93,7 @@ export default function Home() {
     return(
         <>
             <Header/> {/* Chamando component Header para aparecer primeiro no component Home onde estamos */}
-            <Corpo>
+            {!active && <Corpo>
                 <div className='flex items-center text-center justify-center font-bold'>
                         <h1 className='text-textPrimary md:text-base xl:text-2xl 2xl:text-4xl'>Bem vindo(a) ao</h1>
                         <Image src={logoMaior} alt="" className='h-50 w-50'/>
@@ -104,8 +106,13 @@ export default function Home() {
                         <h2 className='text-textPrimary md:text-base xl:text-2xl 2xl:text-4xl w-100'>Clique no botão abaixo para adicionar suas músicas</h2>
                         <button onClick={() => setIsOpen(!isOpen)} className=''><Image className='w-35 md:h-35 xl:w-48 xl:h-48 2xl:w-70 2xl:h-70 cursor-pointer rounded-full' src={botaoAdicionar} alt="" /></button>
                 </div>
-            </Corpo>
-            <Footer/> {/* Chamando component Footer para aparecer primeiro no component Home onde estamos */}
+            </Corpo>}
+            
+            {active ? (
+                <PageMusic active={active} setActive={setActive}/>
+            ) : (
+                <Footer active={active} setActive={setActive}/> 
+            )}
             <Modal isOpen={isOpen} closed={() => {setIsOpen(false); setMusicas([]);}}>
                 <FormModal handleSubmit={handleSubmit}/>
 
