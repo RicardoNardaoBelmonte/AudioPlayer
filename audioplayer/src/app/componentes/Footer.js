@@ -10,7 +10,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useEffect , useRef, useState } from 'react';
 import pause from '../../../public/assets/home/header/pause.png';
 
-export function Footer({ active, setActive}) {
+export function Footer({ active, setActive, setCurrentMusic, currentMusic, play, setPlay}) {
 
     const {data: publicMusicas = []} = useQuery({
         queryKey: ['publicMusicas'],
@@ -50,11 +50,9 @@ export function Footer({ active, setActive}) {
         };
     });
 
-    const [play, setPlay] = useState(false);
     const progress = useRef(null);
     const song = useRef(null);
     const playControl  = useRef(null);
-    const [currentMusic, setCurrentMusic] = useState(0);
     const [randomMusic, setRandomMusic] = useState(false);
     const [volume, setVolume] = useState(1);
     const [currentTime, setCurrentTime] = useState(0);

@@ -11,7 +11,7 @@ import pause from '../../../public/assets/home/header/pause.png';
 import voltar from '../../../public/assets/home/header/voltar.png';
 
 
-export default function PageMusic({active, setActive}) {
+export default function PageMusic({active, setActive, setCurrentMusic, currentMusic, play, setPlay}) {
 
     const {data: publicMusicas = []} = useQuery({
         queryKey: ['publicMusicas'],
@@ -51,11 +51,9 @@ export default function PageMusic({active, setActive}) {
         };
     });
 
-    const [play, setPlay] = useState(false);
     const progress = useRef(null);
     const song = useRef(null);
     const playControl  = useRef(null);
-    const [currentMusic, setCurrentMusic] = useState(0);
     const [randomMusic, setRandomMusic] = useState(false);
     const [volume, setVolume] = useState(1);
     const [currentTime, setCurrentTime] = useState(0);
@@ -163,55 +161,55 @@ export default function PageMusic({active, setActive}) {
                 </audio>
             )}
 
-            {musicasComAudio.map((musica) => (
-                <div key={musica.titulo} className="flex flex-col">
-                    <div className="flex flex-col justify-center text-center text-white mt-5 gap-2">
-                        <span className="text-base xl:text-lg">{musica.titulo}</span>
-                        <span className="text-gray-400 texte-base">{musica.artista}</span>
+            {musicasComAudio.length > 0 &&(
+                <div key={musicasComAudio[currentMusic].titulo} className="flex flex-col">
+                <div className="flex flex-col justify-center text-center text-white mt-5 gap-2">
+                    <span className="text-base xl:text-lg">{musicasComAudio[currentMusic].titulo}</span>
+                    <span className="text-gray-400 texte-base">{musicasComAudio[currentMusic].artista}</span>
+                </div>
+
+                <div className="flex justify-center mt-10">
+                    <Image className="rounded" src={musicasComAudio[currentMusic].thumb} alt={musicasComAudio[currentMusic].titulo} width={300} height={100}/>
+                </div>
+
+                <div className="text-gray-400 text-base flex justify-center mt-5">
+                    <span>{musicasComAudio[currentMusic].duracao}</span>
+                </div>
+
+                <div className="min-w-[18rem] xl:w-[30rem] flex align-center justify-center mx-auto mt-5">
+                    <input type='range' min={0} max={song.current?.duration || 0} step={0.01} value={currentTime} className='' id='progress' ref={progress} onChange={handleProgressChange}/>
+                </div>
+
+
+                <div className="flex items-center mt-15 justify-center relative">
+
+                    <div className="flex gap-15 lg:gap-28">
+                        <button className="cursor-pointer" onClick={() => handleRandomMusic()}>
+                            <Image className="w-5 h-5" src={loop} alt="aleatório" />
+                        </button>
+
+                        <button className="cursor-pointer" onClick={() => handlePrev()}>
+                            <Image className="w-6 h-6" src={proximoLeft} alt="Anterior" />
+                        </button>
+
+                        <button className="cursor-pointer" ref={playControl} onClick={() => handlePlay()}>
+                            <Image className="w-10 h-10" src={ play ? pause : playButton} alt="Play" />
+                        </button>
+
+                        <button className="cursor-pointer" onClick={() => handleNext()}>
+                            <Image className="w-6 h-6" src={proximoRight} alt="Próxima" />
+                        </button>
                     </div>
 
-                    <div className="flex justify-center mt-10">
-                        <Image src={musica.thumb} alt={musica.titulo} width={300} height={100}/>
-                    </div>
-
-                    <div className="text-gray-400 text-base flex justify-center mt-5">
-                        <span>{musica.duracao}</span>
-                    </div>
-
-                    <div className="min-w-[18rem] xl:w-[30rem] flex align-center justify-center mx-auto mt-5">
-                        <input type='range' min={0} max={song.current?.duration || 0} step={0.01} value={currentTime} className='' id='progress' ref={progress} onChange={handleProgressChange}/>
-                    </div>
-
-
-                    <div className="flex items-center mt-15 justify-center relative">
-
-                        <div className="flex gap-15 lg:gap-28">
-                            <button className="cursor-pointer" onClick={() => handleRandomMusic()}>
-                                <Image className="w-5 h-5" src={loop} alt="aleatório" />
-                            </button>
-
-                            <button className="cursor-pointer" onClick={() => handlePrev()}>
-                                <Image className="w-6 h-6" src={proximoLeft} alt="Anterior" />
-                            </button>
-
-                            <button className="cursor-pointer" ref={playControl} onClick={() => handlePlay()}>
-                                <Image className="w-10 h-10" src={ play ? pause : playButton} alt="Play" />
-                            </button>
-
-                            <button className="cursor-pointer" onClick={() => handleNext()}>
-                                <Image className="w-6 h-6" src={proximoRight} alt="Próxima" />
-                            </button>
-                        </div>
-
-                        <div className='relative group absolute -right-10  md:-right-13 xl:-right-24 flex items-center w-20'>
-                            <button className="cursor-pointer relative flex items-center gap-2">
-                                <Image className="w-6 h-6" src={soundVolume} alt="Volume" />
-                            </button>
-                            <input type="range" min={0} max={1} step={0.01} value={volume} onChange={handleVolumeChange} className="absolute opacity-0 group-hover:opacity-100 ml-8" id='volume'/>
-                        </div>
+                    <div className='relative group absolute -right-10  md:-right-13 xl:-right-24 flex items-center w-20'>
+                        <button className="cursor-pointer relative flex items-center gap-2">
+                            <Image className="w-6 h-6" src={soundVolume} alt="Volume" />
+                        </button>
+                        <input type="range" min={0} max={1} step={0.01} value={volume} onChange={handleVolumeChange} className="absolute opacity-0 group-hover:opacity-100 ml-8" id='volume'/>
                     </div>
                 </div>
-            ))}
+                </div>
+            )}
         </div>
     )
 }
