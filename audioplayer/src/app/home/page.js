@@ -23,6 +23,8 @@ export default function Home() {
     const [isOpen, setIsOpen] = useState(false);
     const [musicas, setMusicas] = useState([]);
     const [active, setActive] = useState(false);
+    const [currentMusic, setCurrentMusic] = useState(0); 
+    const [play, setPlay] = useState(false); 
 
     async function handleSubmit(e, nomeMusica){
         e.preventDefault();
@@ -109,9 +111,9 @@ export default function Home() {
             </Corpo>}
             
             {active ? (
-                <PageMusic active={active} setActive={setActive}/>
+                <PageMusic active={active} setActive={setActive} setCurrentMusic={setCurrentMusic} currentMusic={currentMusic} play={play} setPlay={setPlay}/>
             ) : (
-                <Footer active={active} setActive={setActive}/> 
+                <Footer active={active} setActive={setActive} setCurrentMusic={setCurrentMusic} currentMusic={currentMusic} play={play} setPlay={setPlay}/> 
             )}
             <Modal isOpen={isOpen} closed={() => {setIsOpen(false); setMusicas([]);}}>
                 <FormModal handleSubmit={handleSubmit}/>

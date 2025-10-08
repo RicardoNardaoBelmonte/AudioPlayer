@@ -12,6 +12,8 @@ export default function Favs(){
 
     const queryClient = useQueryClient();
     const [active, setActive] = useState(false);
+    const [currentMusic, setCurrentMusic] = useState(0); 
+    const [play, setPlay] = useState(false); 
 
     const {data: MusicasDb = [], isLoading, isError} = useQuery({
         queryKey: ['musicas'],
@@ -94,9 +96,9 @@ export default function Favs(){
                     
             </Corpo>}
             {active ? (
-                <PageMusic active={active} setActive={setActive}/>
+                <PageMusic active={active} setActive={setActive} setCurrentMusic={setCurrentMusic} currentMusic={currentMusic} play={play} setPlay={setPlay}/>
             ) : (
-                <Footer active={active} setActive={setActive}/>
+                <Footer active={active} setActive={setActive} setCurrentMusic={setCurrentMusic} currentMusic={currentMusic} play={play} setPlay={setPlay}/>
             )}
         </>
     )
