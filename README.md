@@ -25,7 +25,9 @@ Vá até o diretório: ```AudioPlayer/audioplayer```
 
 Instale as dependências do projeto: ```npm install```
 
-###### Será necessário colcar o arquivo .env.local na raíz do projeto, pois contém chaves de API. Solicite através da url: https://drive.google.com/file/d/16hF61kev3nOKqea5ZMtajwrSev5P0XhN/view?usp=drive_link
+###### Será necessário colcar o arquivo .env.local na raíz do projeto, pois contém chaves de API. Solicite através da url: https://drive.google.com/file/d/1iMVs-BQAu6GjEy235172c5WgoleuWJMe/view?usp=drive_link
+<img width="350" height="218" alt="env" src="https://github.com/user-attachments/assets/1e932ca7-863f-4ffa-acf7-612df7652d06" />
+
 
 
 Execute a aplicação: ```npm run dev```
@@ -45,7 +47,9 @@ No terminal, execute: ```rm -rf node_modules package-lock.json```
 
 Depois: ```npm install```
 
-###### Será necessário colcar o arquivo .env.local na raíz do projeto, pois contém chaves de API. Solicite através da url: https://drive.google.com/file/d/16hF61kev3nOKqea5ZMtajwrSev5P0XhN/view?usp=drive_link
+###### Será necessário colcar o arquivo .env.local na raíz do projeto, pois contém chaves de API. Solicite através da url: https://drive.google.com/file/d/1iMVs-BQAu6GjEy235172c5WgoleuWJMe/view?usp=drive_link
+<img width="350" height="218" alt="env" src="https://github.com/user-attachments/assets/4b428c99-bf63-4336-8833-30367e77ce2c" />
+
 
 Execute a aplicação: ```npm run dev```
 
