@@ -65,7 +65,7 @@ Após a finalização, acesse a url: ```http://localhost:3000```
 ![add](https://github.com/user-attachments/assets/e1238636-9f27-471b-b3fe-7fa1e60419a2)
 
 # Licença
-Este projeto está licenciado sob a Licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+Este projeto está licenciado sob a Licença MIT. Veja o arquivo [LICENSE](LICENSE.txt) para mais detalhes.
 
 
 
