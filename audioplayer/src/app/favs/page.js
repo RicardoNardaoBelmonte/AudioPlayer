@@ -74,7 +74,7 @@ export default function Favs(){
                             <div  className='grid grid-cols-12 items-center p-5 hover:bg-borderGray mt-2 rounded-xl w-full'>
                                 <div className='col-span-5'>
                                     <div className='flex tems-center items-center'>
-                                        <button className='cursor-pointer flex gap-5' onClick={() => setActive(true)}>
+                                        <button className='cursor-pointer flex gap-5' onClick={() => setActive(true)} aria-label='show musicPage'>
                                             <Image className='rounded' src={musica.thumb} width={50} height={50} alt='thumb da musica'/>
                                             <div className='flex flex-col text-textPrimary'>
                                                 <span className='text-white w-60 text-start overflow-hidden truncate text-xs xl:text-base'>{musica.titulo}</span>
@@ -87,7 +87,7 @@ export default function Favs(){
                                     <span className='text-center text-xs xl:text-base'>{musica.artista}</span>
                                 </div>
                                 <div className='col-span-1 text-textPrimary text-end'>
-                                    <button onClick={() => deletarMusica.mutate(musica.id) } className='cursor-pointer'><Image className='rounded w-5 h-5' src={delet} alt='deletar musica'/></button>
+                                    <button onClick={() => deletarMusica.mutate(musica.id) } className='cursor-pointer' aria-label='delete music'><Image className='rounded w-5 h-5' src={delet} alt='deletar musica'/></button>
                                 </div> 
                             </div>
                         </li>

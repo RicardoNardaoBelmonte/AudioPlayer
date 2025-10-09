@@ -48,7 +48,7 @@ export default function Home() {
                     <h2 className='text-2xl font-bold text-center text-primary'>Adicionar Música</h2>
                     <div className='flex gap-10'>
                         <input type='text' placeholder='Digite o nome da musica...' className='p-2 text-white border border-borderGray rounded w-full' value={data} onChange={(e) => setData(e.target.value)}/>
-                        <button type='submit' className='p-2 bg-primary text-white cursor-pointer rounded hover:scale-110 transition-transform duration-300 smooth'>Enviar</button>
+                        <button aria-label='submit' type='submit' className='p-2 bg-primary text-white cursor-pointer rounded hover:scale-110 transition-transform duration-300 smooth'>Enviar</button>
                     </div>
                 </form>
 
@@ -64,7 +64,7 @@ export default function Home() {
                                 <span className='text-white font-semibold text-base truncate w-60'>{musica.nome}</span>
                                 <span className='text-white font-semibold text-base truncate w-60'>{musica.artista}</span>
                             </div>
-                            <button onClick={() => adicionarMutation.mutate({musica, path})} className='ml-5 p-1 bg-green-500 text-white cursor-pointer rounded'>
+                            <button aria-label='add music' onClick={() => adicionarMutation.mutate({musica, path})} className='ml-5 p-1 bg-green-500 text-white cursor-pointer rounded'>
                                 Adiconar
                             </button>
                         </div>
@@ -106,7 +106,7 @@ export default function Home() {
 
                     <div className='flex flex-col items-center text-center justify-center font-bold'>
                         <h2 className='text-textPrimary md:text-base xl:text-2xl 2xl:text-4xl w-100'>Clique no botão abaixo para adicionar suas músicas</h2>
-                        <button onClick={() => setIsOpen(!isOpen)} className=''><Image className='w-35 md:h-35 xl:w-48 xl:h-48 2xl:w-70 2xl:h-70 cursor-pointer rounded-full' src={botaoAdicionar} alt="" /></button>
+                        <button aria-label='search music' onClick={() => setIsOpen(!isOpen)} className=''><Image className='w-35 md:h-35 xl:w-48 xl:h-48 2xl:w-70 2xl:h-70 cursor-pointer rounded-full' src={botaoAdicionar} alt="" /></button>
                 </div>
             </Corpo>}
             

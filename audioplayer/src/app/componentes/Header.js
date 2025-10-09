@@ -36,7 +36,7 @@ export function Header() {
 
             <input type="password" placeholder='Senha' className='p-2 border border-borderGray rounded text-white' value={loginData.senha} onChange={(e) => setLoginData({...loginData, senha: e.target.value})}/>
 
-            <button type='submit' className='bg-primary cursor-pointer text-white p-2 rounded hover:scale-110 transition-transform duration-300 smooth'>Submit</button>
+            <button type='submit' className='bg-primary cursor-pointer text-white p-2 rounded hover:scale-110 transition-transform duration-300 smooth' aria-label='submit'>Submit</button>
         </form>
     )}
 
@@ -52,7 +52,7 @@ export function Header() {
 
             <input type="password" placeholder='Senha' className='p-2 border border-borderGray rounded text-white' value={registerData.senha} onChange={(e) => setRegisterData({...registerData, senha: e.target.value})}/>
 
-            <button type='submit' className='bg-primary cursor-pointer text-white p-2 rounded hover:scale-110 transition-transform duration-300 smooth'>Submit</button>
+            <button type='submit' className='bg-primary cursor-pointer text-white p-2 rounded hover:scale-110 transition-transform duration-300 smooth' aria-label='submit'>Submit</button>
         </form>
     )}
 
@@ -123,7 +123,7 @@ export function Header() {
         <header className='w-full bg-background fixed top-0 left-0 z-50' >
             <nav className='h-20 flex items-center w-full justify-between'>
                 <div className='ml-10 w-7 h-7'>
-                    <button className='relative cursor-pointer' onClick={() => setActive(!active)}><Image className='h-6 w-6' src={hamburguerButton} alt="" /></button>
+                    <button className='relative cursor-pointer' onClick={() => setActive(!active)} aria-label='hamburguer-button'><Image className='h-6 w-6' src={hamburguerButton} alt="" /></button>
                         <ul className={`absolute left-0 mt-1 ml-5 w-40 rounded-2xl bg-background p-1 border-black border rounded z-50 transform transition-all duration-300 ease-in-out origin-top
                         ${active ? "opacity-100 scale-100 visible" : "opacity-0 scale-y-0 invisible"}`}>
                             <li className='hover:bg-[#262626] text-white px-3 rounded'><a href="">Arquivo</a></li>
@@ -145,12 +145,12 @@ export function Header() {
                 {isLogged ? 
                     <div className='flex gap-5 text-white items-center mr-5'>
                         <span className='text-base md:text-xl'>{nome}</span>
-                        <button onClick={handleSair} className='cursor-pointer bg-red-500 p-3 rounded text-base md:text-xl'>Sair</button>
+                        <button onClick={handleSair} className='cursor-pointer bg-red-500 p-3 rounded text-base md:text-xl' aria-label='login out'>Sair</button>
                     </div>
                 :
                     <div className='flex gap-5 mr-5'>
-                        <button className='text-white bg-primary p-2 rounded cursor-pointer text-base md:text-xl' onClick={() => setShowLogin(true)}>Login</button>
-                        <button className='text-white bg-green-600 p-2 rounded cursor-pointer text-base md:text-xl' onClick={() => setShowRegister(true)}>Register</button>
+                        <button className='text-white bg-primary p-2 rounded cursor-pointer text-base md:text-xl' onClick={() => setShowLogin(true)} aria-label='login'>Login</button>
+                        <button className='text-white bg-green-600 p-2 rounded cursor-pointer text-base md:text-xl' onClick={() => setShowRegister(true)} aria-label='register'>Register</button>
                     </div>
                 }
 
