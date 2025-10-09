@@ -26,7 +26,7 @@ export default function Corpo({children, activeLink, setActiveLink}){
                     <nav className='h-full w-full'>
                         <ul className='flex flex-col gap-5 pt-10'>
                             {linkNav.map((item) => (
-                                <li key={item.name} className='w-full h-10 pl-5 hover:bg-[#262626] transition-colors rounded'><Link href={item.path} className='flex gap-5 items-center w-full h-full'><Image src={currentPath === item.path ? item.iconAtivo : item.icon } className='w-4 h-4' alt="" /><span className='text-gray-400 xs:text-xs text-base md:text-xl 2xl:text-2xl'>{item.name}</span></Link></li>
+                                <li key={item.name} className='w-full h-10 pl-5 hover:bg-[#262626] transition-colors rounded'><Link href={item.path} className='flex gap-5 items-center w-full h-full'><Image src={currentPath === item.path ? item.iconAtivo : item.icon } className='w-4 h-4' alt={item.name}/><span className='text-gray-400 xs:text-xs text-base md:text-xl 2xl:text-2xl'>{item.name}</span></Link></li>
                             ))}
                         </ul>
                     </nav>
