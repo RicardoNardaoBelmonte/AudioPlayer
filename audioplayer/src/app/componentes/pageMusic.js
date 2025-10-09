@@ -151,7 +151,7 @@ export default function PageMusic({active, setActive, setCurrentMusic, currentMu
     return(
         <div className="mt-30 h-[80vh] bg-background mx-5 md:mx-10 lg:mx-42 xl:mx-72 2xl:mx-96 min-w-56 relative">
 
-            <button onClick={() => setActive(false)} className="absolute top-5 left-5 cursor-pointer p-2 rounded">
+            <button onClick={() => setActive(false)} className="absolute top-5 left-5 cursor-pointer p-2 rounded" aria-label="go-back button">
                 <Image src={voltar} alt="Voltar" width={40} height={15}/>
             </button>
             
@@ -177,35 +177,35 @@ export default function PageMusic({active, setActive, setCurrentMusic, currentMu
                 </div>
 
                 <div className="min-w-[18rem] xl:w-[30rem] flex align-center justify-center mx-auto mt-5">
-                    <input type='range' min={0} max={song.current?.duration || 0} step={0.01} value={currentTime} className='' id='progress' ref={progress} onChange={handleProgressChange}/>
+                    <input alt="music progress" type='range' min={0} max={song.current?.duration || 0} step={0.01} value={currentTime} className='' id='progress' ref={progress} onChange={handleProgressChange}/>
                 </div>
 
 
                 <div className="flex items-center mt-15 justify-center relative">
 
                     <div className="flex gap-15 lg:gap-28">
-                        <button className="cursor-pointer" onClick={() => handleRandomMusic()}>
+                        <button className="cursor-pointer" onClick={() => handleRandomMusic()} aria-label="random music">
                             <Image className="w-5 h-5" src={loop} alt="aleatório" />
                         </button>
 
-                        <button className="cursor-pointer" onClick={() => handlePrev()}>
+                        <button className="cursor-pointer" onClick={() => handlePrev()} aria-label="prev music">
                             <Image className="w-6 h-6" src={proximoLeft} alt="Anterior" />
                         </button>
 
-                        <button className="cursor-pointer" ref={playControl} onClick={() => handlePlay()}>
+                        <button className="cursor-pointer" ref={playControl} onClick={() => handlePlay()} aria-label="play and pause">
                             <Image className="w-10 h-10" src={ play ? pause : playButton} alt="Play" />
                         </button>
 
-                        <button className="cursor-pointer" onClick={() => handleNext()}>
+                        <button className="cursor-pointer" onClick={() => handleNext()} aria-label="next music">
                             <Image className="w-6 h-6" src={proximoRight} alt="Próxima" />
                         </button>
                     </div>
 
                     <div className='relative group absolute -right-10  md:-right-13 xl:-right-24 flex items-center w-20'>
-                        <button className="cursor-pointer relative flex items-center gap-2">
+                        <button className="cursor-pointer relative flex items-center gap-2" aria-label="sound volume">
                             <Image className="w-6 h-6" src={soundVolume} alt="Volume" />
                         </button>
-                        <input type="range" min={0} max={1} step={0.01} value={volume} onChange={handleVolumeChange} className="absolute opacity-0 group-hover:opacity-100 ml-8" id='volume'/>
+                        <input alt="sound volume bar" type="range" min={0} max={1} step={0.01} value={volume} onChange={handleVolumeChange} className="absolute opacity-0 group-hover:opacity-100 ml-8" id='volume'/>
                     </div>
                 </div>
                 </div>

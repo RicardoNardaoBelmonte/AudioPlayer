@@ -181,7 +181,7 @@ export function Footer({ active, setActive, setCurrentMusic, currentMusic, play,
                             </div>
 
                             <div>
-                                <button className="cursor-pointer">
+                                <button className="cursor-pointer" aria-label='is favs'>
                                 <Image className="" src={estrela} alt="Favoritar" />
                                 </button>
                             </div>
@@ -192,19 +192,19 @@ export function Footer({ active, setActive, setCurrentMusic, currentMusic, play,
                     </div>
 
                     <div className="flex gap-10 items-center">
-                        <button className="cursor-pointer" onClick={() => handleRandomMusic()}>
+                        <button className="cursor-pointer" onClick={() => handleRandomMusic()} aria-label='random music'>
                             <Image className="w-5 h-5" src={loop} alt="aleatório" />
                         </button>
 
-                        <button className="cursor-pointer" onClick={() => handlePrev()}>
+                        <button className="cursor-pointer" onClick={() => handlePrev()} aria-label='prev music'>
                             <Image className="w-6 h-6" src={proximoLeft} alt="Anterior" />
                         </button>
 
-                        <button className="cursor-pointer" ref={playControl} onClick={() => handlePlay()}>
+                        <button className="cursor-pointer" ref={playControl} onClick={() => handlePlay()} aria-label='pause and play'>
                             <Image className="w-10 h-10" src={ play ? pause : playButton} alt="Play" />
                         </button>
 
-                        <button className="cursor-pointer" onClick={() => handleNext()}>
+                        <button className="cursor-pointer" onClick={() => handleNext()} aria-label='next music'>
                             <Image className="w-6 h-6" src={proximoRight} alt="Próxima" />
                         </button>
                     </div>
@@ -215,15 +215,15 @@ export function Footer({ active, setActive, setCurrentMusic, currentMusic, play,
                         </span>
                         
                         <div className='relative group flex items-center w-20 mr-6'>
-                            <button className="cursor-pointer relative flex items-center gap-2">
+                            <button className="cursor-pointer relative flex items-center gap-2" aria-label='sound-music'>
                                 <Image className="w-6 h-6" src={soundVolume} alt="Volume" />
                             </button>
-                            <input type="range" min={0} max={1} step={0.01} value={volume} onChange={handleVolumeChange} className="absolute opacity-0 group-hover:opacity-100 ml-8" id='volume'/>
+                            <input alt='sound volume bar' type="range" min={0} max={1} step={0.01} value={volume} onChange={handleVolumeChange} className="absolute opacity-0 group-hover:opacity-100 ml-8" id='volume'/>
                         </div>
                     </div>
                 </div>
 
-                <input type='range' min={0} max={song.current?.duration || 0} step={0.01} value={currentTime} className='mt-3' id='progress' ref={progress} onChange={handleProgressChange}/>
+                <input alt='music progress' type='range' min={0} max={song.current?.duration || 0} step={0.01} value={currentTime} className='mt-3' id='progress' ref={progress} onChange={handleProgressChange}/>
             </div>
         </footer>
     )
